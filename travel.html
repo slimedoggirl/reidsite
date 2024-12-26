@@ -42,26 +42,19 @@
     <h2>Pins</h2>
     <div id="map"></div>
   </main>
-  <!-- Your custom JavaScript file -->
   <script src="js/maps.js"></script>
-
-  <!-- Placeholder for API Key to be replaced by GitHub Actions -->
+  
   <script>
-    function loadMapScript() {
-      try {
-        const apiKey = 'AIzaSyAYH4SlmbEsW3D8O4mrKpbIIti4v0VBmy8';  // Placeholder to be replaced
-
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
-      } catch (error) {
-        console.error('Error loading Google Maps script:', error);
-      }
+    function fetchApiKeyAndLoadScript() {
+      const apiKey = 'AIzaSyAYH4SlmbEsW3D8O4mrKpbIIti4v0VBmy8'; // Replace with injected key
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
     }
-
-    window.onload = loadMapScript;
+  
+    window.onload = fetchApiKeyAndLoadScript;
   </script>
 </body>
 </html>
