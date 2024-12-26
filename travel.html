@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/html5reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>RDSAWSM</title>
+    <style>
+        /* Ensuring the map container has size */
+        #map {
+            height: 500px; /* Set as required */
+            width: 100%;
+        }
+        /* Adding some margins and padding for better spacing */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            margin-bottom: 20px;
+        }
+        main {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="javascript:void(0);" class="icon" id="hamburger-icon">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </a>
+            <ul class="topnav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="travel.html">Travel</a></li>
+                <li><a href="game.html">Game</a></li>
+            </ul>
+        </nav>
+        <h1 class="headers_one">RDSAWSM</h1>
+    </header>
+    <main>
+        <h2>Travel</h2>
+        <h2>Pins</h2>
+        <div id="map"></div>
+    </main>
+    <!-- Your custom JavaScript file -->
+    <script src="js/maps.js"></script>
+
+    <!-- Script to fetch API key and load Google Maps API -->
+    <script>
+      async function loadMapScript() {
+        try {
+          // Fetch the API key from the backend
+          const response = await fetch('/api/key');
+          const data = await response.json();
+          const apiKey = data.apiKey;
+
+          // Dynamically create a script element to load the Google Maps script
+          const script = document.createElement('script');
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+          script.defer = true;
+          document.head.appendChild(script);
+        } catch (error) {
+          console.error('Error loading Google Maps script:', error);
+        }
+      }
+
+      // Load the map script when the window loads
+      window.onload = loadMapScript;
+    </script>
+</body>
+</html>

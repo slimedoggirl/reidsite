@@ -1,0 +1,27 @@
+name: Deploy Node.js App
+
+on:
+  push:
+    branches: [ "main" ]  # Replace with your primary branch name if it's different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specify the Node.js version you are using
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start server
+        env:
+          API_KEY: ${{ secrets.API_KEY }}  # Access API_KEY from GitHub secrets
+        run: |
+          node js/server.js
