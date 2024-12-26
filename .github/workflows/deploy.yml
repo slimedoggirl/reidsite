@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Adjust to your deployment branch if different
+      - main  # Adjust this to your deployment branch if different
 
 jobs:
   build:
@@ -13,11 +13,11 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@v2
 
-    - name: Replace API Key in HTML
+    - name: Replace API Key in travel.html
       run: sed -i 's/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g' travel.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # This token is automatically provided by GitHub Actions
+        publish_dir: .

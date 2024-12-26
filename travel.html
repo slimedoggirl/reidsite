@@ -1,68 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/html5reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>RDSAWSM</title>
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            margin-bottom: 20px;
-        }
-        main {
-            padding: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/html5reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>RDSAWSM</title>
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      margin-bottom: 20px;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="javascript:void(0);" class="icon" id="hamburger-icon">
-                <i class="fa fa-bars" aria-hidden="true"></i>
-            </a>
-            <ul class="topnav">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="travel.html">Travel</a></li>
-                <li><a href="game.html">Game</a></li>
-            </ul>
-        </nav>
-        <h1 class="headers_one">RDSAWSM</h1>
-    </header>
-    <main>
-        <h2>Travel</h2>
-        <h2>Pins</h2>
-        <div id="map"></div>
-    </main>
-    <!-- Your custom JavaScript file -->
-    <script src="js/maps.js"></script>
+  <header>
+    <nav>
+      <a href="javascript:void(0);" class="icon" id="hamburger-icon">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </a>
+      <ul class="topnav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="travel.html">Travel</a></li>
+        <li><a href="game.html">Game</a></li>
+      </ul>
+    </nav>
+    <h1 class="headers_one">RDSAWSM</h1>
+  </header>
+  <main>
+    <h2>Travel</h2>
+    <h2>Pins</h2>
+    <div id="map"></div>
+  </main>
+  <!-- Your custom JavaScript file -->
+  <script src="js/maps.js"></script>
 
-    <script>
-      function loadMapScript() {
-        try {
-          // Placeholder for API Key to be replaced by GitHub Actions
-          const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
-
-          // Create a script element to load the Google Maps script
-          const script = document.createElement('script');
-          script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
-          script.async = true;  // Load the script asynchronously
-          script.defer = true;  // Defer the execution of the script
-          document.head.appendChild(script);
-        } catch (error) {
-          console.error('Error loading Google Maps script:', error);
-        }
+  <!-- Placeholder for API Key to be replaced by GitHub Actions -->
+  <script>
+    function loadMapScript() {
+      try {
+        const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      } catch (error) {
+        console.error('Error loading Google Maps script:', error);
       }
+    }
 
-      window.onload = loadMapScript;
-    </script>
+    window.onload = loadMapScript;
+  </script>
 </body>
 </html>
