@@ -3,19 +3,18 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Or the branch you want to deploy from
+      - main  # Adjust to your deployment branch if different
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
 
     - name: Replace API Key in HTML
-      run: |
-        sed -i 's/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g' travel.html
+      run: sed -i 's/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g' travel.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

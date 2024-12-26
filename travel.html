@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="css/style.css">
     <title>RDSAWSM</title>
     <style>
-        /* Ensuring the map container has size */
         #map {
             height: 500px;
             width: 100%;
         }
-        /* Adding some margins and padding for better spacing */
         body {
             margin: 0;
             padding: 0;
@@ -47,15 +45,17 @@
     <!-- Your custom JavaScript file -->
     <script src="js/maps.js"></script>
 
-    <!-- Placeholder for API Key - this will be replaced by GitHub Actions -->
     <script>
-      async function loadMapScript() {
+      function loadMapScript() {
         try {
-          const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';  // Placeholder to be replaced
+          // Placeholder for API Key to be replaced by GitHub Actions
+          const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
 
+          // Create a script element to load the Google Maps script
           const script = document.createElement('script');
           script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
-          script.defer = true;
+          script.async = true;  // Load the script asynchronously
+          script.defer = true;  // Defer the execution of the script
           document.head.appendChild(script);
         } catch (error) {
           console.error('Error loading Google Maps script:', error);
