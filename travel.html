@@ -9,7 +9,7 @@
     <style>
         /* Ensuring the map container has size */
         #map {
-            height: 500px; /* Set as required */
+            height: 500px;
             width: 100%;
         }
         /* Adding some margins and padding for better spacing */
@@ -47,16 +47,12 @@
     <!-- Your custom JavaScript file -->
     <script src="js/maps.js"></script>
 
-    <!-- Script to fetch API key and load Google Maps API -->
+    <!-- Placeholder for API Key - this will be replaced by GitHub Actions -->
     <script>
       async function loadMapScript() {
         try {
-          // Fetch the API key from the backend
-          const response = await fetch('/api/key');
-          const data = await response.json();
-          const apiKey = data.apiKey;
+          const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';  // Placeholder to be replaced
 
-          // Dynamically create a script element to load the Google Maps script
           const script = document.createElement('script');
           script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
           script.defer = true;
@@ -66,7 +62,6 @@
         }
       }
 
-      // Load the map script when the window loads
       window.onload = loadMapScript;
     </script>
 </body>
