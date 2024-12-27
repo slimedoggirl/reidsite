@@ -15,21 +15,25 @@ jobs:
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
-
+    
+    - name: Debug before replacement
+      run: cat travel.html
+    
     - name: Replace API Key in travel.html
-      run: sed -i "s/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g" travel.html
-
+      run: |
+        echo "Replacing API key in travel.html"
+        sed -i "s/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g" travel.html
+        
     - name: Verify API Key Replacement
       run: |
+        echo "Verifying API Key Replacement..."
+        cat travel.html
         if grep -q "${{ secrets.API_KEY }}" travel.html; then
-          echo "API Key replacement successful.";
+          echo "API Key replacement successful."
         else
-          echo "API Key replacement failed.";
-          exit 1;
+          echo "API Key replacement failed."
+          exit 1
         fi
-
-    - name: Debug travel.html for API Key Replacement
-      run: cat travel.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
