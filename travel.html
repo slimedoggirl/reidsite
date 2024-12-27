@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-maps-api-key" content="YOUR_GOOGLE_MAPS_API_KEY">  <!-- Meta tag for API key placeholder -->
   <link rel="stylesheet" href="css/html5reset.css">
   <link rel="stylesheet" href="css/style.css">
   <title>RDSAWSM</title>
@@ -46,8 +45,9 @@
   <!-- Your custom JavaScript file -->
   <script src="js/maps.js"></script>
   <script>
-    function loadGoogleMaps(apiKey) {
-      console.log('API Key from Meta Tag:', apiKey); // Debugging
+    function loadGoogleMaps() {
+      const apiKey = 'AIzaSyAYH4SlmbEsW3D8O4mrKpbIIti4v0VBmy8';  // Directly inserted API key
+      console.log('API Key:', apiKey); // Debugging
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async`;
       script.async = true;
@@ -56,13 +56,7 @@
     }
 
     window.onload = () => {
-      const metaApiKey = document.querySelector('meta[name="google-maps-api-key"]');
-      if (metaApiKey) {
-        console.log('Meta tag found', metaApiKey);  // Debugging
-        loadGoogleMaps(metaApiKey.content);
-      } else {
-        console.error('Google Maps API key meta tag missing');
-      }
+      loadGoogleMaps();
     }
   </script>
 </body>
