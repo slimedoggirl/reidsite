@@ -15,7 +15,8 @@ function initMap() {
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
-        styles: mapStyles
+        styles: mapStyles,
+        mapId: 'eceeccfe92ab5448',  // Use your actual Map ID here
     });
 
     loadMarkers(map);
@@ -45,14 +46,13 @@ function initMap() {
     }
 
     function addMarker(map, position, icon = 'images/flowerMap.png') {
-        const flowerImg = document.createElement('img');
-        flowerImg.src = icon;
+        const flowerImg = icon;
 
         if (google.maps.marker && 'AdvancedMarkerElement' in google.maps.marker) {
             new google.maps.marker.AdvancedMarkerElement({
                 map: map,
                 position: position,
-                content: flowerImg,
+                content: `<img src="${icon}">`,
                 title: 'A marker using flowerMap.png'
             });
         } else {
@@ -60,7 +60,7 @@ function initMap() {
                 map: map,
                 position: position,
                 title: 'A marker using flowerMap.png',
-                icon: icon
+                icon: flowerImg
             });
         }
     }

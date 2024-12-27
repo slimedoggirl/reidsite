@@ -22,7 +22,6 @@
       padding: 20px;
     }
   </style>
-  <!-- Your custom JavaScript file -->
   <script src="js/maps.js"></script>
   <script>
     function loadGoogleMaps() {
@@ -35,9 +34,7 @@
       document.head.appendChild(script);
     }
 
-    window.onload = () => {
-      loadGoogleMaps();
-    }
+    window.onload = loadGoogleMaps;
   </script>
 </head>
 <body>
