@@ -19,10 +19,16 @@ jobs:
     - name: Debug before replacement
       run: cat travel.html
 
+    - name: Print the API key from secrets
+      run: echo "The API key from secrets is: ${{ secrets.API_KEY }}"
+
     - name: Replace API Key in travel.html
       run: |
         echo "Replacing API key in travel.html"
         sed -i "s/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g" travel.html
+
+    - name: Debug after replacement
+      run: cat travel.html
 
     - name: Verify API Key Replacement
       run: |
