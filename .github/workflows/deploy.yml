@@ -15,23 +15,27 @@ jobs:
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
-    
+
     - name: Debug before replacement
       run: cat travel.html
-    
+
     - name: Replace API Key in travel.html
       run: |
         echo "Replacing API key in travel.html"
         sed -i "s/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g" travel.html
-        
+
     - name: Verify API Key Replacement
       run: |
         echo "Verifying API Key Replacement..."
-        cat travel.html
-        if grep -q "${{ secrets.API_KEY }}" travel.html; then
+        cat travel.html  # Print the file content to log
+        if grep -q "YOUR_GOOGLE_MAPS_API_KEY" travel.html; then
+          echo "API Key replacement failed. Found placeholder key."
+          exit 1
+        elif grep -q "${{ secrets.API_KEY }}" travel.html; then
           echo "API Key replacement successful."
         else
-          echo "API Key replacement failed."
+          echo "API Key replacement failed. Replacement key not found."
+          cat travel.html  # Print the file again for debugging
           exit 1
         fi
 
