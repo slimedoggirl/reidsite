@@ -13,19 +13,11 @@ function initMap() {
         { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#9abdff" }, { "visibility": "on" }] }
     ];
 
-    // Initialize the map with the custom styles
+    // Initialize the map with custom styles
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
         styles: mapStyles
-    });
-
-    // Optional: subscribe to map capability changes.
-    map.addListener('mapcapabilities_changed', () => {
-        const mapCapabilities = map.getMapCapabilities();
-        if (!mapCapabilities.isAdvancedMarkersAvailable) {
-            // Advanced markers are *not* available, add a fallback.
-        }
     });
 
     // Load existing markers from localStorage
@@ -43,7 +35,8 @@ function initMap() {
         const markers = JSON.parse(localStorage.getItem('markers')) || [];
         markers.push({
             lat: position.lat(),
-            lng: position.lng()
+            lng: position.lng(),
+            icon: 'images/flowerMap.png'  // Save the relative path to the icon
         });
         localStorage.setItem('markers', JSON.stringify(markers));
     }
@@ -53,30 +46,30 @@ function initMap() {
         const markers = JSON.parse(localStorage.getItem('markers')) || [];
         markers.forEach((markerData) => {
             const position = new google.maps.LatLng(markerData.lat, markerData.lng);
-            addMarker(map, position);
+            addMarker(map, position, markerData.icon);
         });
     }
 
     // Add marker to the map
-    function addMarker(map, position) {
-        const beachFlagImg = document.createElement('img');
-        beachFlagImg.src = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+    function addMarker(map, position, icon = 'images/flowerMap.png') {
+        const flowerImg = document.createElement('img');
+        flowerImg.src = icon;
 
-        // Check if the AdvancedMarkerElement class is available
-        if ('AdvancedMarkerElement' in google.maps.marker) {
+        // Check if google.maps.marker is defined and AdvancedMarkerElement is available
+        if (google.maps.marker && 'AdvancedMarkerElement' in google.maps.marker) {
             new google.maps.marker.AdvancedMarkerElement({
                 map: map,
                 position: position,
-                content: beachFlagImg,
-                title: 'A marker using a custom PNG Image'
+                content: flowerImg,
+                title: 'A marker using flowerMap.png'
             });
         } else {
             // Fallback to a standard marker if AdvancedMarkerElement is not available
             new google.maps.Marker({
                 map: map,
                 position: position,
-                title: 'A marker using a fallback standard marker',
-                icon: beachFlagImg.src
+                title: 'A marker using flowerMap.png',
+                icon: icon
             });
         }
     }
