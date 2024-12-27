@@ -19,16 +19,18 @@ jobs:
     - name: Debug before replacement
       run: cat travel.html
 
-    - name: Print the API key from secrets
+    - name: Print the API key from secrets (masked)
       env:
         API_KEY: ${{ secrets.API_KEY }}
       run: |
         echo "The API key from secrets is: $API_KEY"
 
     - name: Replace API Key in travel.html
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
       run: |
         echo "Replacing API key in travel.html"
-        sed -i "s/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g" travel.html
+        sed -i "s@YOUR_GOOGLE_MAPS_API_KEY@$API_KEY@g" travel.html
 
     - name: Debug after replacement
       run: cat travel.html
@@ -40,7 +42,7 @@ jobs:
         if grep -q "YOUR_GOOGLE_MAPS_API_KEY" travel.html; then
           echo "API Key replacement failed. Found placeholder key."
           exit 1
-        elif grep -q "${{ secrets.API_KEY }}" travel.html; then
+        elif grep -q "${API_KEY}" travel.html; then
           echo "API Key replacement successful."
         else
           echo "API Key replacement failed. Replacement key not found."
