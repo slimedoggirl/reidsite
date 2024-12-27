@@ -45,7 +45,9 @@
   <script src="js/maps.js"></script>
   <script>
     function fetchApiKeyAndLoadScript() {
-      const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';  // Placeholder to be replaced
+      // Placeholder for API Key to be replaced by GitHub Actions
+      const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async`;
       script.async = true;
