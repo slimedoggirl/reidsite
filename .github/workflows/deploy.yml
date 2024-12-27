@@ -1,4 +1,7 @@
-on: push  # Trigger the workflow on push events
+on: 
+  push:
+    branches:
+      - main  # Adjust this to your default branch
 
 permissions:
   contents: write  # Ensure the GITHUB_TOKEN has write permissions for contents
@@ -12,7 +15,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Replace API Key in travel.html
-      run: sed -i 's/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g' travel.html
+      run: sed -i "s/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g" travel.html
 
     - name: Verify API Key Replacement
       run: |
@@ -22,6 +25,10 @@ jobs:
           echo "API Key replacement failed."
           exit 1
         fi
+
+    - name: Debug travel.html for API Key Replacement
+      run: cat travel.html
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
