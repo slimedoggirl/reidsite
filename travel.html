@@ -48,6 +48,9 @@
       // Placeholder for API Key to be replaced by GitHub Actions
       const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
 
+      console.log('API Key Length:', apiKey.length);  // Log the length of the API Key for verification
+      console.log('First 4 characters of API Key:', apiKey.slice(0, 4));  // Log the first 4 characters
+      
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async`;
       script.async = true;
