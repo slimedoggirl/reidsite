@@ -1,0 +1,55 @@
+header{
+    background-color: #c1cb5B;/*e5f25c*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* Style the navigation menu from W3Schools*/
+.topnav {
+    width: 100%;
+    background-color: #f6f7f6;
+    position: relative;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav li {
+    display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+    display: inline-block;
+    margin: 0 15px;
+    padding: 5px 20px;
+    border-radius: 15px;
+    color: #f6f7f6;
+    text-decoration: none;
+    font-family: 'Jacquard 24', Courier, monospace;
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+
+/* Style the hamburger menu */
+.topnav a.icon {
+    background: none;
+}
+
+
+i {
+    color: #f6f7f6;
+}
+
+.fa.fa-bars {
+    color: #c1cb5B;
+    font-size: 40px;
+    background-color: #f6f7f6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+ #map {
+        height: 100%;
+        width: 100%;
+  }
