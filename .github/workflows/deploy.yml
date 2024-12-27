@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Adjust this to your deployment branch if different
+      - main  # Adjust this to the branch you want to deploy from
 
 permissions:
   contents: write  # Ensure the GITHUB_TOKEN has write permissions for contents
@@ -22,5 +22,5 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  # This token is automatically provided by GitHub Actions
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: .
