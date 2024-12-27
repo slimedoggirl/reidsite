@@ -22,7 +22,7 @@ jobs:
     - name: Debug travel.html
       run: |
         echo "Inspecting travel.html for API key replacement:"
-        head -n 20 travel.html  # Print the first 20 lines to verify the replacement
+        head -n 59 travel.html  # Print the first 59 lines to verify the replacement
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
