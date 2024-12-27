@@ -1,9 +1,4 @@
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main  # Adjust this to your deployment branch if different
+on: push  # Trigger the workflow on push events
 
 permissions:
   contents: write  # Ensure the GITHUB_TOKEN has write permissions for contents
@@ -19,13 +14,16 @@ jobs:
     - name: Replace API Key in travel.html
       run: sed -i 's/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g' travel.html
 
-    - name: Debug travel.html for API Key Replacement
+    - name: Verify API Key Replacement
       run: |
-        echo "Inspecting travel.html for replaced API key:"
-        tail -n 20 travel.html  # Print the last 20 lines to verify the replacement
-
+        if grep -q "${{ secrets.API_KEY }}" travel.html; then
+          echo "API Key replacement successful."
+        else
+          echo "API Key replacement failed."
+          exit 1
+        fi
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .
+        publish_dir: ./public  # Adjust this to your build output directory
