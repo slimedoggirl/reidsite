@@ -19,6 +19,9 @@ jobs:
     - name: Replace API Key in travel.html
       run: sed -i 's/YOUR_GOOGLE_MAPS_API_KEY/${{ secrets.API_KEY }}/g' travel.html
 
+    - name: Debug travel.html
+      run: head -n 20 travel.html  # Print the first 20 lines to ensure the replacement
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
