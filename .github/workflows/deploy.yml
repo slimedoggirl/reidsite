@@ -3,10 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Adjust this to your deployment branch if different
+      - main
 
 permissions:
-  contents: write  # Ensure the GITHUB_TOKEN has write permissions for contents
+  contents: write
 
 jobs:
   build:
