@@ -22,6 +22,8 @@
       padding: 20px;
     }
   </style>
+  <!-- Meta tag for API key, to be replaced by GitHub Actions -->
+  <meta name="google-maps-api-key" content="YOUR_GOOGLE_MAPS_API_KEY">
 </head>
 <body>
   <header>
@@ -42,22 +44,26 @@
     <h2>Pins</h2>
     <div id="map"></div>
   </main>
+  <!-- Your custom JavaScript file -->
   <script src="js/maps.js"></script>
   <script>
-    function fetchApiKeyAndLoadScript() {
-      // Placeholder for API Key to be replaced by GitHub Actions
-      const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
-
-      console.log('API Key Length:', apiKey.length);  // Log the length of the API Key for verification
-      console.log('First 4 characters of API Key:', apiKey.slice(0, 4));  // Log the first 4 characters
-      
+    function loadGoogleMaps(apiKey) {
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async`;
       script.async = true;
       script.defer = true;
       document.head.appendChild(script);
     }
-    window.onload = fetchApiKeyAndLoadScript;
+
+    window.onload = () => {
+      // Fetch the API key from a meta tag dynamically
+      const metaApiKey = document.querySelector('meta[name="google-maps-api-key"]');
+      if (metaApiKey) {
+        loadGoogleMaps(metaApiKey.content);
+      } else {
+        console.error('Google Maps API key meta tag missing');
+      }
+    }
   </script>
 </body>
 </html>
