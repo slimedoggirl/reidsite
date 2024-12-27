@@ -1,4 +1,5 @@
-function initMap() {
+// Initialize and load the map with custom styles and marker functionality
+async function initMap() {
     // The styles array from Snazzy Maps
     const mapStyles = [
         { "featureType": "administrative", "elementType": "labels", "stylers": [{ "visibility": "off" }] },
@@ -13,10 +14,14 @@ function initMap() {
         { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#9abdff" }, { "visibility": "on" }] }
     ];
 
+    // Request needed libraries.
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
     // Initialize the map with custom styles
-    const map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
+    const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
         zoom: 8,
+        center: { lat: -34.397, lng: 150.644 },
         styles: mapStyles
     });
 
@@ -24,15 +29,17 @@ function initMap() {
     loadMarkers(map);
 
     // Add click event listener to the map
-    map.addListener('click', (mapsMouseEvent) => {
+    map.addListener('click', (mapsMouseEvent: google.maps.MapMouseEvent) => {
         const position = mapsMouseEvent.latLng;
-        addMarker(map, position);
-        saveMarker(position);
+        if (position) {
+            addMarker(map, position);
+            saveMarker(position);
+        }
     });
 
     // Save marker position to localStorage
-    function saveMarker(position) {
-        const markers = JSON.parse(localStorage.getItem('markers')) || [];
+    function saveMarker(position: google.maps.LatLng) {
+        const markers = JSON.parse(localStorage.getItem('markers') || '[]');
         markers.push({
             lat: position.lat(),
             lng: position.lng(),
@@ -42,20 +49,23 @@ function initMap() {
     }
 
     // Load markers from localStorage
-    function loadMarkers(map) {
-        const markers = JSON.parse(localStorage.getItem('markers')) || [];
-        markers.forEach((markerData) => {
+    function loadMarkers(map: google.maps.Map) {
+        const markers = JSON.parse(localStorage.getItem('markers') || '[]');
+        markers.forEach((markerData: { lat: number, lng: number, icon: string }) => {
             const position = new google.maps.LatLng(markerData.lat, markerData.lng);
             addMarker(map, position, markerData.icon);
         });
     }
 
     // Add marker to the map
-    function addMarker(map, position, icon = 'images/flowerMap.png') {
+    function addMarker(map: google.maps.Map, position: google.maps.LatLng, icon: string = 'images/flowerMap.png') {
         const flowerImg = document.createElement('img');
         flowerImg.src = icon;
+        flowerImg.style.width = '32px';  // Adjust the size of the image if necessary
+        flowerImg.style.height = '32px';
+        flowerImg.style.transform = 'translate(-50%, -100%)';  // Align the image properly
 
-        // Check if google.maps.marker is defined and AdvancedMarkerElement is available
+        // Check if AdvancedMarkerElement is available
         if (google.maps.marker && 'AdvancedMarkerElement' in google.maps.marker) {
             new google.maps.marker.AdvancedMarkerElement({
                 map: map,
@@ -76,4 +86,9 @@ function initMap() {
 }
 
 // Expose the initMap function globally
+declare global {
+    interface Window {
+        initMap: () => void;
+    }
+}
 window.initMap = initMap;
