@@ -43,17 +43,15 @@
     <div id="map"></div>
   </main>
   <script src="js/maps.js"></script>
-  
   <script>
     function fetchApiKeyAndLoadScript() {
-      const apiKey = 'AIzaSyAYH4SlmbEsW3D8O4mrKpbIIti4v0VBmy8'; // Replace with injected key
+      const apiKey = 'AIzaSyAYH4SlmbEsW3D8O4mrKpbIIti4v0VBmy8';  // Placeholder to be replaced
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async`;
       script.async = true;
       script.defer = true;
       document.head.appendChild(script);
     }
-  
     window.onload = fetchApiKeyAndLoadScript;
   </script>
 </body>
